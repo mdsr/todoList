@@ -1,0 +1,43 @@
+<!doctype html>
+<html data-ng-app="todoApp">
+
+<head>
+	<title>Todo List</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
+	<link rel="stylesheet" href="main.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
+	<script src="main.js"></script>
+</head>
+
+<body class="grey darken-3 white-text">
+	<div class="container" data-ng-controller="todoController as todoList">
+		<div class="card-panel deep-orange accent-3">
+			<h3><span>Todo List</span></h3>
+		</div>
+		<span>{{todoList.remaining()}}</span> of <span>{{todoList.todoList.length}}</span> remaining [ <a href="" data-ng-click="todoList.archive()">archive</a>		]
+		<form data-ng-submit="todoList.addTodo()">
+			<div class="row">
+				<div class="input-field col s11">
+					<input type="text" data-ng-model="todoList.todoText" placeholder="Enter a task...">
+				</div>
+				<div class="input-field col s1">
+					<a class="right btn-floating btn-large waves-effect waves-light red" data-ng-click="todoList.addTodo()">
+						<i class="material-icons">add</i>
+					</a>
+				</div>
+			</div>
+		</form>
+		<ul class="collection">
+			<li class="collection-item" data-ng-repeat="todo in todoList.todoList">
+				<input type="checkbox" id="{{'isDone-' + $index}}" data-ng-model="todo.isDone">
+				<label for="{{'isDone-' + $index}}"><span class="done-{{todo.isDone}}">{{todo.text}}</span></label>
+
+			</li>
+		</ul>
+	</div>
+</body>
+
+</html>
